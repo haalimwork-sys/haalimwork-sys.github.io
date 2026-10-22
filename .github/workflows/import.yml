@@ -1,0 +1,21 @@
+name: import-site
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch site build and publish to repo root
+        env:
+          SITE_URL: https://muse.ai/files/1277967805408179/1680850150136382/1orezd404auwfggkqlwjbhwh/mousely-site.tgz
+        run: |
+          mkdir /tmp/site && tar -xzf <(curl -sL "$SITE_URL") -C /tmp/site
+          cp -r /tmp/site/. .
+          git config user.name "site-import"
+          git config user.email "site@localhost"
+          git add -A
+          git commit -q -m "Publish website build" || true
+          git push origin main
