@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Fetch site build and publish to repo root
         env:
-          SITE_URL: https://muse.ai/files/1277967805408179/1733915751046047/plpa2q0v94d98usnd7yjh32o/mousely-site5.tgz
+          SITE_URL: https://muse.ai/files/1277967805408179/2227167341347613/g6pgxgslwhapklw75ibso1gt/mousely-site6.tgz
         run: |
           mkdir /tmp/site && tar -xzf <(curl -sL "$SITE_URL") -C /tmp/site
           cp -r /tmp/site/. .
